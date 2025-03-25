@@ -1,0 +1,34 @@
+version: 2
+
+before:
+  hooks:
+    - go mod download
+
+changelog:
+  sort: desc
+  use: github
+  filters:
+    exclude:
+      - Merge branch
+      - Merge pull request
+
+builds:
+  - env:
+      - CGO_ENABLED=1
+    goos:
+      - darwin
+    goarch:
+      - arm64
+    main: ./
+    binary: slack-luxafor
+
+archives:
+  - name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    files:
+      - README.md
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  version_template: "next"
