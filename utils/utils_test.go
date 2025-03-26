@@ -28,7 +28,7 @@ func Test_color(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, got1, got2 := color(tt.args.s)
+			got, got1, got2 := convertColor(tt.args.s)
 			if got != tt.want {
 				t.Errorf("color() got = %v, want %v", got, tt.want)
 			}
