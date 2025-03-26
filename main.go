@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/dsdeboer/slack-luxafor/luxafor"
 	"github.com/slack-go/slack"
 	"os"
 	"strconv"
@@ -39,7 +38,7 @@ func updateSlackStatus(status string) {
 }
 
 func updateStatusLight(status string) {
-	luxs := luxafor.Enumerate()
+	luxs := Enumerate()
 	if len(luxs) == 0 {
 		fmt.Println("No attached devices. Exiting.")
 		os.Exit(0)

@@ -1,4 +1,4 @@
-version: 2
+version: 1
 
 before:
   hooks:
@@ -13,22 +13,57 @@ changelog:
       - Merge pull request
 
 builds:
-  - env:
-      - CGO_ENABLED=1
+  - id: darwin-amd64
+    main: ./
+    binary: golang-cross
+    goos:
+      - darwin
+    goarch:
+      - amd64
+    env:
+      - PKG_CONFIG_SYSROOT_DIR=/sysroot/macos/amd64
+      - PKG_CONFIG_PATH=/sysroot/macos/amd64/usr/local/lib/pkgconfig
+      - CC=o64-clang
+      - CXX=o64-clang++
+    flags:
+      - -mod=readonly
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+  - id: darwin-arm64
+    main: ./
+    binary: golang-cross
     goos:
       - darwin
     goarch:
       - arm64
-    main: ./
-    binary: slack-luxafor
+    env:
+      - PKG_CONFIG_SYSROOT_DIR=/sysroot/macos/arm64
+      - PKG_CONFIG_PATH=/sysroot/macos/arm64/usr/local/lib/pkgconfig
+      - CC=oa64-clang
+      - CXX=oa64-clang++
+    flags:
+      - -mod=readonly
+    ldflags:
+      - -s -w -X main.version={{.Version}}
 
 archives:
-  - name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+  - id: golang-cross
+    builds:
+      - darwin-amd64
+      - darwin-arm64
     files:
       - README.md
-
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format: zip
+    wrap_in_directory: true
 checksum:
   name_template: 'checksums.txt'
-
 snapshot:
-  version_template: "next"
+  name_template: "{{ .Tag }}"
+
+release:
+  github:
+    owner: dsdeboer
+    name: slack-luxafor
+  prerelease: auto
+  draft: false

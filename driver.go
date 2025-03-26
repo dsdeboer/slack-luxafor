@@ -1,4 +1,4 @@
-package luxafor
+package main
 
 import (
 	"github.com/karalabe/hid"

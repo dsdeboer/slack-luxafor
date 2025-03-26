@@ -1,4 +1,4 @@
-package luxafor
+package main
 
 // Commands recognized by the Luxafor.
 const (
