@@ -1,5 +1,5 @@
 PACKAGE_NAME          := github.com/dsdeboer/slack-luxafor
-GOLANG_CROSS_VERSION  ?= v1.21.6
+GOLANG_CROSS_VERSION  ?= v1.24
 
 SYSROOT_DIR     ?= sysroots
 SYSROOT_ARCHIVE ?= sysroots.tar.bz2
