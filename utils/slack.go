@@ -21,7 +21,7 @@ func UpdateSlackStatus(status, message string) error {
 		return err
 	}
 	switch status {
-	case "available":
+	case "available", "off":
 		if err := api.SetUserPresence("auto"); err != nil {
 			return err
 		}
