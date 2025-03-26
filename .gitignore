@@ -1,3 +1,5 @@
-*.txt
-/.idea
-dist/
+.idea
+*.tar.xz
+dist
+vendor
+.release-env
