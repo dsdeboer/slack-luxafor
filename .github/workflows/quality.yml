@@ -7,8 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-
-  build:
+  quality-gate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

@@ -13,11 +13,11 @@ func Test_color(t *testing.T) {
 		want1 uint8
 		want2 uint8
 	}{
-		{"Test - red", args{"red"}, 255, 0, 0},
-		{"Test - yellow", args{"yellow"}, 255, 255, 0},
-		{"Test - green", args{"green"}, 0, 255, 0},
-		{"Test - off", args{"off"}, 0, 0, 0},
-		{"Test - other", args{"some"}, 0, 0, 0},
+		{"red", args{"red"}, 255, 0, 0},
+		{"yellow", args{"yellow"}, 255, 255, 0},
+		{"green", args{"green"}, 0, 255, 0},
+		{"off", args{"off"}, 0, 0, 0},
+		{"other", args{"some"}, 0, 0, 0},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
