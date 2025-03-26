@@ -29,7 +29,7 @@ func Enumerate() []Luxafor {
 	return luxs
 }
 
-func (lux Luxafor) sendCommand(command byte, led LED, r, g, b, speed uint8) (err error) {
+func (lux Luxafor) sendCommand(command COMMAND, led LED, r, g, b, speed uint8) (err error) {
 	info := lux.deviceInfo
 	device, err := info.Open()
 	if err != nil {
@@ -39,7 +39,7 @@ func (lux Luxafor) sendCommand(command byte, led LED, r, g, b, speed uint8) (err
 	defer func() { _ = device.Close() }() // Best effort.
 
 	// Sets specified LED to RGB.
-	if _, err := device.Write([]byte{command, byte(led), r, g, b}); err != nil {
+	if _, err := device.Write([]byte{byte(command), byte(led), r, g, b}); err != nil {
 		return errors.Wrap(err, "device write")
 	}
 	return nil
@@ -76,7 +76,7 @@ func (lux Luxafor) Off() (err error) {
 	defer func() { _ = device.Close() }() // Best effort.
 
 	// Turns off the leds.
-	if _, err := device.Write([]byte{static, byte(All), 0, 0, 0}); err != nil {
+	if _, err := device.Write([]byte{byte(static), byte(All), 0, 0, 0}); err != nil {
 		return errors.Wrap(err, "device write")
 	}
 	return nil

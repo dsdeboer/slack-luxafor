@@ -1,21 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"github.com/slack-go/slack"
-	"os"
 )
 
-func updateSlackStatus(status string) {
+func updateSlackStatus(status string) error {
 	value, err := MustGetenv("LUXAFOR_SLACK_API_TOKEN")
 	if err != nil {
-		panic(err)
+		return err
 	}
 	api := slack.New(value)
-	errStatus := api.SetUserCustomStatus(status, ":speech_balloon:", 0)
-	if errStatus != nil {
-		fmt.Println(errStatus.Error())
-		os.Exit(1)
-	}
-
+	return api.SetUserCustomStatus(status, ":speech_balloon:", 0)
 }
