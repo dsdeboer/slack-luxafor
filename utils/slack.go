@@ -8,11 +8,40 @@ import (
 	"github.com/slack-go/slack"
 )
 
-func UpdateSlackStatus(status string) error {
+func api() (*slack.Client, error) {
 	value, err := MustGetenv("LUXAFOR_SLACK_API_TOKEN")
+	if err != nil {
+		return nil, err
+	}
+	return slack.New(value), nil
+}
+func UpdateSlackStatus(status, message string) error {
+	api, err := api()
 	if err != nil {
 		return err
 	}
-	api := slack.New(value)
-	return api.SetUserCustomStatus(status, ":speech_balloon:", 0)
+	switch status {
+	case "available":
+		if err := api.SetUserPresence("auto"); err != nil {
+			return err
+		}
+
+		return api.SetUserCustomStatus("", "", 0)
+	default:
+		emoji := convertStatusToEmoji(status)
+		if message == "" {
+			message = status
+		}
+		return api.SetUserCustomStatus(message, emoji, 0)
+	}
+}
+
+func convertStatusToEmoji(status string) string {
+	switch status {
+	case "focus":
+		return ":headphones:"
+
+	default:
+		return ":speech_balloon:"
+	}
 }

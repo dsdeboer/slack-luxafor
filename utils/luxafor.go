@@ -8,7 +8,7 @@ import (
 	"fmt"
 )
 
-func UpdateStatusLight(status string) error {
+func UpdateStatusLight(color string) error {
 	luxs := Enumerate()
 	if len(luxs) == 0 {
 		fmt.Println("No attached devices. Exiting.")
@@ -17,7 +17,7 @@ func UpdateStatusLight(status string) error {
 
 	lux := luxs[1]
 
-	r, g, b := color(status)
+	r, g, b := convertColor(color)
 
 	return lux.Solid(r, g, b)
 }

@@ -17,7 +17,7 @@ var unsetCmd = &cobra.Command{
 	Short: "Sets the status to unset and your light to green",
 	Long:  `Quickly set your status to unset and your light to green.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := utils.UpdateSlackStatus("off"); err != nil {
+		if err := utils.UpdateSlackStatus("off", ""); err != nil {
 			fmt.Println(err)
 		}
 		if err := utils.UpdateStatusLight("white"); err != nil {

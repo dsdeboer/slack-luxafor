@@ -28,7 +28,8 @@ var setCmd = &cobra.Command{
 	Long:  `Given you've set up the slack token and the luxafor device, you can set the status with this command.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		status := args[0]
-		if err := utils.UpdateSlackStatus(status); err != nil {
+		message, _ := cmd.Flags().GetString("message")
+		if err := utils.UpdateSlackStatus(status, message); err != nil {
 			fmt.Println(err)
 		}
 		if err := utils.UpdateStatusLight(utils.ConvertStatusToColor(status)); err != nil {
@@ -39,4 +40,5 @@ var setCmd = &cobra.Command{
 
 func init() {
 	statusCmd.AddCommand(setCmd)
+	setCmd.Flags().String("message", "", "A message to accompany the status")
 }

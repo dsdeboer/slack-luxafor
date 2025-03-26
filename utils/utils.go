@@ -64,7 +64,7 @@ func IsValidStatus(s string) bool {
 		return false
 	}
 }
-func color(s string) (uint8, uint8, uint8) {
+func convertColor(s string) (uint8, uint8, uint8) {
 	rgb := [3]string{"0", "0", "0"}
 	switch s {
 	case "red":
