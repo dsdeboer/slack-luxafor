@@ -7,10 +7,14 @@ import (
 )
 
 func updateSlackStatus(status string) {
-	api := slack.New(MustGetenv("LUXAFOR_SLACK_API_TOKEN"))
-	err := api.SetUserCustomStatus(status, ":speech_balloon:", 0)
+	value, err := MustGetenv("LUXAFOR_SLACK_API_TOKEN")
 	if err != nil {
-		fmt.Println(err.Error())
+		panic(err)
+	}
+	api := slack.New(value)
+	errStatus := api.SetUserCustomStatus(status, ":speech_balloon:", 0)
+	if errStatus != nil {
+		fmt.Println(errStatus.Error())
 		os.Exit(1)
 	}
 

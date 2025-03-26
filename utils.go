@@ -5,10 +5,10 @@ import (
 	"os"
 )
 
-func MustGetenv(key string) string {
+func MustGetenv(key string) (string, error) {
 	val := os.Getenv(key)
 	if val == "" {
-		panic(fmt.Sprintf("missing environment variable '%s'", key))
+		return "", fmt.Errorf("missing environment variable '%s'", key)
 	}
-	return val
+	return val, nil
 }
