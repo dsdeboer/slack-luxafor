@@ -1,4 +1,8 @@
-package main
+/*
+Copyright © 2025 Duncan de Boer <duncan.d.boer@gmail.com>
+This file is part of CLI application slack-luxafor.
+*/
+package utils
 
 import (
 	"os"

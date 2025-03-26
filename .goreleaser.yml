@@ -15,7 +15,7 @@ changelog:
 builds:
   - id: darwin-amd64
     main: ./
-    binary: golang-cross
+    binary: slack-luxafor
     goos:
       - darwin
     goarch:
@@ -31,7 +31,7 @@ builds:
       - -s -w -X main.version={{.Version}}
   - id: darwin-arm64
     main: ./
-    binary: golang-cross
+    binary: slack-luxafor
     goos:
       - darwin
     goarch:
@@ -47,7 +47,7 @@ builds:
       - -s -w -X main.version={{.Version}}
 
 archives:
-  - id: golang-cross
+  - id: slack-luxafor
     builds:
       - darwin-amd64
       - darwin-arm64

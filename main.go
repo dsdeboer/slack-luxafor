@@ -1,24 +1,11 @@
+/*
+Copyright © 2025 Duncan de Boer <duncan.d.boer@gmail.com>
+This file is part of CLI application slack-luxafor.
+*/
 package main
 
-import (
-	"fmt"
-	"os"
-)
+import "github.com/dsdeboer/slack-luxafor/cmd"
 
 func main() {
-	if len(os.Args) <= 1 {
-		fmt.Println("Usage: slack-luxafor <color>\nExample: slack-luxafor red")
-		os.Exit(1)
-	}
-
-	status := os.Args[1]
-
-	if err := updateSlackStatus(status); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	if err := updateStatusLight(status); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	cmd.Execute()
 }
