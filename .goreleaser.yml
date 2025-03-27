@@ -21,10 +21,8 @@ builds:
     goarch:
       - amd64
     env:
-      - PKG_CONFIG_SYSROOT_DIR=/sysroot/macos/amd64
-      - PKG_CONFIG_PATH=/sysroot/macos/amd64/usr/local/lib/pkgconfig
-      - CC=o64-clang
-      - CXX=o64-clang++
+      - CGO_ENABLED=1
+      - GO111MODULE=on
     flags:
       - -mod=readonly
     ldflags:
@@ -37,10 +35,8 @@ builds:
     goarch:
       - arm64
     env:
-      - PKG_CONFIG_SYSROOT_DIR=/sysroot/macos/arm64
-      - PKG_CONFIG_PATH=/sysroot/macos/arm64/usr/local/lib/pkgconfig
-      - CC=oa64-clang
-      - CXX=oa64-clang++
+      - CGO_ENABLED=1
+      - GO111MODULE=on
     flags:
       - -mod=readonly
     ldflags:
@@ -48,19 +44,21 @@ builds:
 
 archives:
   - id: slack-luxafor
-    builds:
+    ids:
       - darwin-amd64
       - darwin-arm64
     files:
       - README.md
+    formats:
+      - tar.gz
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-    format: zip
     wrap_in_directory: true
 checksum:
   name_template: 'checksums.txt'
 snapshot:
-  name_template: "{{ .Tag }}"
-
+  version_template: "{{ .Tag }}"
+env_files:
+  github_token: .release-env
 release:
   github:
     owner: dsdeboer

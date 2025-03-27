@@ -5,7 +5,7 @@ This file is part of CLI application slack-luxafor.
 package cmd
 
 import (
-	"github.com/dsdeboer/slack-luxafor-utils"
+	"github.com/dsdeboer/slack-luxafor/utils"
 	"github.com/spf13/cobra"
 )
 

@@ -7,7 +7,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/dsdeboer/slack-luxafor-utils"
+	"github.com/dsdeboer/slack-luxafor/utils"
 	"github.com/spf13/cobra"
 )
 
