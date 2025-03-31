@@ -32,6 +32,10 @@ func UpdateSlackStatus(status, message string) error {
 		if message == "" {
 			message = status
 		}
+		if message == "none" {
+			message = ""
+			emoji = ""
+		}
 		return api.SetUserCustomStatus(message, emoji, 0)
 	}
 }
